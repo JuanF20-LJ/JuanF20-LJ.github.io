@@ -4,33 +4,11 @@ import Project from "../components/Project.astro";
 import Sidebar from "../components/Sidebar.astro";
 const projects = [
   {
-    title: "CodeCraft",
-    desc: [
-      "Developed a large-scale e-commerce platform for indie game developers",
-      "Designed and implemented UI, backend, and database architecture",
-      "Contributed to RESTful API and GraphQL design",
-      "Led a team of three engineers for several months"
+    title: "Una breve introducción",
+    desc: ["En el siguiente video, podrás conocer un poco mas sobre mí."
     ],
-    tech: ["React", "Next.js", "Node.js", "MongoDB", "Heroku"]
+    tech: []
   },
-  {
-    title: "CloudMason",
-    desc: [
-      "Contributed to microservices architecture design for email distribution system",
-      "Created a backend infrastructure with queues and an event bus",
-      "Designed to handle a high volume ~3 million emails per day"
-    ],
-    tech: ["Node.js", "RabbitMQ", "Docker", "Kubernetes"]
-  },
-  {
-    title: "Sarah (HealthEase.io)",
-    desc: [
-      "Contributed to Israel's largest telehealth platform for doctors and patients",
-      "Developed appointment and billing systems",
-      "Resolved live production bugs and server issues"
-    ],
-    tech: ["React", "Node.js", "Express.js", "MySQL", "AWS"]
-  }
 ];
 ---
 
@@ -46,11 +24,11 @@ const projects = [
           <div class="back-nav-container">
             <a href="/" class="back-nav-button w-inline-block"
               ><img src="/assets/back.svg" loading="lazy" alt="" class="back-nav-img" />
-              <div>Back</div></a
+              <div>Volver</div></a
             >
           </div>
           <div class="content-container">
-            <h1>Software Development</h1>
+            <h1>Presentación</h1>
             <section class="items-container">
                 <div class="resouce-items">
                     {projects.map(project => (
@@ -62,6 +40,14 @@ const projects = [
                     ))}
                   </div>
             </section>
+            <div style="position:relative; padding-bottom:56.25%; height:0;">
+            <iframe
+              src="https://www.youtube.com/embed/fUujnp2Q3_4"
+              style="position:absolute; top:0; left:0; width:100%; height:100%;"
+              frameborder="0"
+              allowfullscreen>
+            </iframe>
+            </div>
           </div>
         </div>
       </nav>
