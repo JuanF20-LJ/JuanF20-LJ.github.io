@@ -1,35 +1,35 @@
 ---
-import Header from "../components/Header.astro";
+import Header from '../components/Header.astro';
 import Project from "../components/Project.astro";
 import Sidebar from "../components/Sidebar.astro";
 const projects = [
   {
-    title: "CodeCraft",
+    title: "Modelado",
     desc: [
-      "Developed a large-scale e-commerce platform for indie game developers",
-      "Designed and implemented UI, backend, and database architecture",
-      "Contributed to RESTful API and GraphQL design",
-      "Led a team of three engineers for several months"
+      "Apartado donde estarán los modelados realizados a lo largo del curso.",
     ],
-    tech: ["React", "Next.js", "Node.js", "MongoDB", "Heroku"]
+    tech: []
   },
   {
-    title: "CloudMason",
+    title: "Normalización",
     desc: [
-      "Contributed to microservices architecture design for email distribution system",
-      "Created a backend infrastructure with queues and an event bus",
-      "Designed to handle a high volume ~3 million emails per day"
+      "Apartado donde se colocarán las normalizaciones generadas.",
     ],
-    tech: ["Node.js", "RabbitMQ", "Docker", "Kubernetes"]
+    tech: []
   },
   {
-    title: "Sarah (HealthEase.io)",
+    title: "SQL",
     desc: [
-      "Contributed to Israel's largest telehealth platform for doctors and patients",
-      "Developed appointment and billing systems",
-      "Resolved live production bugs and server issues"
+      "Apartado donde estarán los trabajos relacionados con SQL.",
     ],
-    tech: ["React", "Node.js", "Express.js", "MySQL", "AWS"]
+    tech: []
+  },
+  {
+    title: "Proyectos",
+    desc: [
+      "Apartado donde estarán los proyectos realizados.",
+    ],
+    tech: []
   }
 ];
 ---
@@ -37,10 +37,10 @@ const projects = [
 <!DOCTYPE html>
 <html
 >
-  <Header title="Presentación | JFLJ" />
+  <Header title="Evidencias | JFLJ" />
   <body>
     <div class="content">
-        <Sidebar selectedItem="software-development" />
+        <Sidebar selectedItem="evidencias" />
       <nav class="main">
         <div class="container">
           <div class="back-nav-container">
@@ -50,7 +50,7 @@ const projects = [
             >
           </div>
           <div class="content-container">
-            <h1>Software Development</h1>
+            <h1>Evidencias</h1>
             <section class="items-container">
                 <div class="resouce-items">
                     {projects.map(project => (
