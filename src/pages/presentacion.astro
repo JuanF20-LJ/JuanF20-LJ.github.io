@@ -2,14 +2,7 @@
 import Header from "../components/Header.astro";
 import Project from "../components/Project.astro";
 import Sidebar from "../components/Sidebar.astro";
-const projects = [
-  {
-    title: "Una breve introducción",
-    desc: ["En el siguiente video, podrás conocer un poco mas sobre mí."
-    ],
-    tech: []
-  },
-];
+
 ---
 
 <!DOCTYPE html>
@@ -31,13 +24,14 @@ const projects = [
             <h1>Presentación</h1>
             <section class="items-container">
                 <div class="resouce-items">
-                    {projects.map(project => (
-                      <Project 
-                        title={project.title} 
-                        desc={project.desc}
-                        tech={project.tech}
-                      />
-                    ))}
+                    <div class="single-item">
+                      <h3>Una breve introducción</h3>
+                      <div class="project-desc project-desc-list w-richtext">
+                        <ul>
+                        <li>En el siguiente video podrás conocer un poco más sobre mí</li>
+                      </ul>
+                      </div>
+                    </div>
                   </div>
             </section>
             <div style="position:relative; padding-bottom:56.25%; height:0;">
