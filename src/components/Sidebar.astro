@@ -59,10 +59,80 @@ const { selectedItem } = Astro.props;
         />
         <div>Presentación</div>
       </a>
+      <div class="dropdown-container">
+        <div
+          class={`nav-link-container dropdown-toggle ${
+            selectedItem?.startsWith('evidencias')
+              ? 'w--current'
+              : ''
+          }`}
+        >
+          <img
+            src="/assets/dns.svg"
+            loading="eager"
+            alt=""
+            class="nav-link-image"
+          />
+
+          <div class="dropdown-title">
+            <span>Evidencias</span>
+            <span class="dropdown-arrow">▼</span>
+          </div>
+        </div>
+
+        <div class="dropdown-menu">
+          <a
+            href="/modelado"
+            class={`dropdown-item ${
+              selectedItem === 'evidencias-modelado'
+                ? 'w--current'
+                : ''
+            }`}
+          >
+            Modelado
+          </a>
+
+          <a
+            href="/normalizacion"
+            class={`dropdown-item ${
+              selectedItem === 'evidencias-normalizacion'
+                ? 'w--current'
+                : ''
+            }`}
+          >
+            Normalización
+          </a>
+
+          <a
+            href="/sql"
+            class={`dropdown-item ${
+              selectedItem === 'evidencias-sql'
+                ? 'w--current'
+                : ''
+            }`}
+          >
+            SQL
+          </a>
+
+          <a
+            href="/proyecto"
+            class={`dropdown-item ${
+              selectedItem === 'evidencias-proyecto'
+                ? 'w--current'
+                : ''
+            }`}
+          >
+            Proyecto
+          </a>
+        </div>
+      </div>
+
       <a
         href="/evidencias"
         class={`nav-link-container w-inline-block ${
-          selectedItem === 'evidencias' ? 'w--current' : ''
+          selectedItem === 'evidencias-antiguas'
+            ? 'w--current'
+            : ''
         }`}
       >
         <img
@@ -71,7 +141,8 @@ const { selectedItem } = Astro.props;
           alt=""
           class="nav-link-image"
         />
-        <div>Evidencias</div>
+
+        <div>Evidencias Antiguas</div>
       </a>
     </nav>
 
