@@ -2,6 +2,54 @@
 const { selectedItem } = Astro.props;
 ---
 
+<style>
+  .dropdown-container {
+    width: 100%;
+  }
+
+  .dropdown-toggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .dropdown-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .dropdown-arrow {
+    font-size: 12px;
+    margin-left: 10px;
+  }
+
+  .dropdown-menu {
+    display: none;
+    flex-direction: column;
+    margin-left: 35px;
+    margin-top: 5px;
+    gap: 6px;
+  }
+
+  .dropdown-container:hover .dropdown-menu {
+    display: flex;
+  }
+
+  .dropdown-item {
+    color: #bdbdbd;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+  }
+
+  .dropdown-item:hover {
+    color: white;
+  }
+</style>
+
 <aside
   data-animation="default"
   data-collapse="medium"
