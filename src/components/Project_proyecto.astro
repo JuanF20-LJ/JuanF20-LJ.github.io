@@ -1,23 +1,79 @@
 ---
-const { title, desc, img, tech } = Astro.props;
+const {
+  title,
+  projectDesc,
+  items,
+  img,
+  tech
+} = Astro.props;
 ---
 
-<div class="single-item">
-  <h3>{title}</h3>
-  <div class="project-desc project-desc-list w-richtext">
-    <ul role="list">
-      {desc.map(item => <li>{item}</li>)}
-    </ul>
-  </div>
-  <div style="text-align:center; margin: 30px 0;">
-              <img 
-                src={"/assets/" + img} 
-                alt="Foto de Evidencia"
-                style="width: 300px; max-width: 100%; border-radius: 8px;"
-              />
+<div class="single-item custom-card">
+  <h3 class="project-title">{title}</h3>
+
+  <p class="project-description">
+    {projectDesc}
+  </p>
+
+  {
+    img && (
+      <div class="image-container">
+        <img
+          src={"/assets/" + img}
+          alt="Imagen del proyecto"
+          class="project-image"
+        />
+      </div>
+    )
+  }
+
+  <div class="items-section">
+    <div class="section-title">
+      Evidencias / Recursos
+    </div>
+
+    <div class="items-list">
+      {
+        items.map(item => (
+          <div class="item-card">
+            <div class="item-title">
+              {item.title}
             </div>
-  <div class="mini-label-white">Aplicacioens y Tecnologias</div>
-  <div class="chips-container">
-    {tech.map(techItem => <div class="single-chip">{techItem}</div>)}
+
+            <p class="item-description">
+              {item.description}
+            </p>
+
+            <a
+              href={item.link}
+              target="_blank"
+              class="item-link"
+            >
+              Ver recurso
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="tech-section">
+    <div class="section-title">
+      Tecnologías Usadas
+    </div>
+
+    <div class="chips-container">
+      {
+        tech.map(techItem => (
+          <a
+            href={techItem.link}
+            target="_blank"
+            class="single-chip"
+          >
+            {techItem.name}
+          </a>
+        ))
+      }
+    </div>
   </div>
 </div>

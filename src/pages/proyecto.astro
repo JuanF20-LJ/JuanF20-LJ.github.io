@@ -4,11 +4,76 @@ import Project from "../components/Project_proyecto.astro";
 import Sidebar from "../components/Sidebar.astro";
 const projects = [
   {
-    title: "Proyectos",
-    desc: [
-      "Apartado donde estarán los proyectos realizados.",
+    title: "LUJUMA",
+
+    projectDesc:
+      "Proyecto enfocado en el conteo de macronutrientes. No busca reemplazar un nutricionista real o dar un dato de como se deberia o no comer, sino que busca ser un ''diario'' de lo que consume el usuario.",
+
+    img: "M. E. R. Biblioteca.drawio.png",
+
+    items: [
+      {
+        title: "Modelo Entidad Relación Extendido",
+        description:
+          "El modelo entidad relación extendido bajo el cual se desarrolló el proyecto.",
+        link:
+          "https://drive.google.com/file/d/1zwvC4ZW0QTPWhb0BO7sBArZ1QR12h5F-/view?usp=sharing"
+      },
+
+      {
+        title: "Modelo Relacional",
+        description:
+          "Modelo relacional del proyecto. En el link van los dos archivos necesarios para poder ejecutarlo en Data Modeler.",
+        link:
+          "https://unbosqueeduco-my.sharepoint.com/:u:/g/personal/jlozadaj_unbosque_edu_co/IQCBHqDG3Ex9ToMH3IQm6dZ1AQC68eYcn8uvJC6zmyxJPUY?e=DxQHFM"
+      },
+
+      {
+        title: "Repositorio GitHub Frontend",
+        description:
+          "Código fuente del front del proyecto.",
+        link:
+          "https://github.com/RAC0ONN/lujuma.git"
+      },
+
+      {
+        title: "Repositorio GitHub Backend",
+        description:
+          "Código fuente del back del proyecto.",
+        link:
+          "https://github.com/JuanF20-LJ/ApiLujumaDB.git"
+      },
+
+      {
+        title: "Repositorio GitHub Base de Datos",
+        description:
+          "Repositorio que almacena los scripts para montar la base de datos del proyecto.",
+        link:
+          "https://github.com/RAC0ONN/scriptsBaseDeDatosLujuma.git"
+      }
     ],
-    tech: []
+
+    tech: [
+      {
+        name: "Java",
+        link: "https://www.java.com/"
+      },
+
+      {
+        name: "MySQL",
+        link: "https://www.mysql.com/"
+      },
+
+      {
+        name: "SpringBoot",
+        link: "https://spring.io/projects/spring-boot"
+      },
+
+      {
+        name: "Angular",
+        link: "https://angular.dev/"
+      }
+    ]
   }
 ];
 ---
@@ -34,10 +99,11 @@ const projects = [
                 <div class="resouce-items">
                     {projects.map(project => (
                       <Project 
-                        title={project.title} 
-                        desc={project.desc}
-                        tech={project.tech}
-                        img={project.img}
+                      title={project.title}
+                      projectDesc={project.projectDesc}
+                      items={project.items}
+                      tech={project.tech}
+                      img={project.img}
                       />
                     ))}
                   </div>
