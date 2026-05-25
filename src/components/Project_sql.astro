@@ -18,6 +18,16 @@ const { title, desc, img, tech } = Astro.props;
             </div>
   <div class="mini-label-white">Aplicacioens y Tecnologias</div>
   <div class="chips-container">
-    {tech.map(techItem => <div class="single-chip">{techItem}</div>)}
+    {
+      tech.map(techItem => (
+       <a
+         href={techItem.link}
+         target="_blank"
+         class="single-chip"
+       >
+        {techItem.name}
+       </a>
+       )) 
+    }
   </div>
 </div>
