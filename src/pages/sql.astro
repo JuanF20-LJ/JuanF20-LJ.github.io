@@ -1,25 +1,56 @@
 ---
 import Header from '../components/Header.astro';
-import Project from "../components/Project_sql.astro";
+import Project from "../components/Project_modelado.astro";
 import Sidebar from "../components/Sidebar.astro";
 const projects = [
   {
-    title: "Álgebra Relacional",
+    title: "Modelado Aerolinea",
     desc: [
-      "Antes de entrar en el lenguaje SQL, se entendió lo que hay detras. Eso vendría siendo el álgebra relacional. Este fue un taller realizado junto a una compañera de universidad.",
+      "Ejercicio donde se hace el modelo entidad relación de una aerolinea.",
     ],
-    img: "Foto Algebra.png",
-    tech: [{name: "PDF EVIDENCIAS", link: "https://unbosqueeduco-my.sharepoint.com/:b:/g/personal/jlozadaj_unbosque_edu_co/IQAlxgNRJtLMRqUzcj4Su8CiARPgALC0cPjXbyi4RKrtEL8?e=YOY9I0"}]
+    img: "M.E.R. Aerolinea.drawio.png",
+    tech: [{name: "DRAW.IO", link: "https://drive.google.com/file/d/1eoV5UgZ4Ajvt-ryevxCCOeUA0_4tVmhr/view?usp=sharing"}]
   },
   {
-    title: "Álgebra Relacional - Calculadora",
+    title: "Modelado Biblioteca",
     desc: [
-      "Se usó una calculdora de álgebra relacional para probar ejercicios y sentencias.",
+      "Ejercicio donde se hace el modelo entidad relación de una biblioteca.",
     ],
-    img: "RELAX.png",
-    tech: [{name: "RELAX", link: "https://dbis-uibk.github.io/relax/calc/local/ufes/local/()"}]
-  }
-];
+    img: "M. E. R. Biblioteca.drawio.png",
+    tech: [{name: "DRAW.IO", link: "https://drive.google.com/file/d/1iclrXz4O1XK9naBpuMN35gMu7ujxgU6W/view?usp=sharing"}]
+  },
+  {
+    title: "Modelado Arreglo Automóvil",
+    desc: [
+      "Ejercicio donde se hace el modelo entidad relación extendido de un caso de un concesionario en donde se arreglan vehículos. En el documento se encuentran tanto el modelo entidad relación extendido como la reducción a tablas.",
+    ],
+    img: "MERE_ArregloAutomovil-MERE.drawio.png",
+    tech: [{name: "DRAW.IO", link: "https://drive.google.com/file/d/1rIFucP0LPHLjZU89O7ZgSDlcNn3pV4KO/view?usp=sharing"}]
+  },
+  {
+    title: "Modelado Nómina",
+    desc: [
+      "Ejercicio donde se hace el modelo entidad relación extendido de un caso relacionado con la distribución de un área de una empresa. En el documento se encuentran tanto el modelo entidad relación extendido como la reducción a tablas.",
+    ],
+    img: "MERE_Nómina-MERE_Nómina.drawio.png",
+    tech: [{name: "DRAW.IO", link: "https://drive.google.com/file/d/1fMfVAxnWFt4V0M7Sv_mG8ZnqyVPPLv0h/view?usp=sharing"}]
+  },
+  {
+    title: "Modelado Residuos Tóxicos",
+    desc: [
+      "Ejercicio donde se hace el modelo entidad relación extendido de un caso de unas empresas que manejan y transportan residuos tóxicos. En el documento se encuentran tanto el modelo entidad relación extendido como la reducción a tablas.",
+    ],
+    img: "MERE_ResiduosTóxicos-MERE_ResiduosTóxicos.drawio.png",
+    tech: [{name: "DRAW.IO", link: "https://drive.google.com/file/d/1WDWUrF5PynUug3FDFdLOKOtEDjycXop4/view?usp=sharing"}]
+  },
+  {
+    title: "Modelado Comidas Rápidas",
+    desc: [
+      "Ejercicio donde se hace el modelo entidad relación extendido de un caso de una tienda de comidas rápidas. En el documento se encuentran tanto el modelo entidad relación extendido como la reducción a tablas.",
+    ],
+    img: "MERE_ComidasRápidas-MERE_ComidasRápidas.drawio.png",
+    tech: [{name: "DRAW.IO", link: "https://drive.google.com/file/d/1GBd79HgpG6n_BpRsMu-FmX8Y3_E_FNvD/view?usp=sharing"}]
+  }];
 ---
 
 <!DOCTYPE html>
@@ -28,7 +59,7 @@ const projects = [
   <Header title="SQL | JFLJ" />
   <body>
     <div class="content">
-        <Sidebar selectedItem="evidencias" />
+        <Sidebar selectedItem="evidencias-sql" />
       <nav class="main">
         <div class="container">
           <div class="back-nav-container">

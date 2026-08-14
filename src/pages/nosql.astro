@@ -1,23 +1,23 @@
 ---
 import Header from '../components/Header.astro';
-import Project from "../components/Project_normalizacion.astro";
+import Project from "../components/Project_sql.astro";
 import Sidebar from "../components/Sidebar.astro";
 const projects = [
   {
-    title: "Normalización Ejercicio Sistema Envio Internacional",
+    title: "Álgebra Relacional",
     desc: [
-      "Ejercicio del taller de normalización, donde se daba una tabla y sus correspondientes columnas. La idea era llevar la tabla hasta la 3FN.",
+      "Antes de entrar en el lenguaje SQL, se entendió lo que hay detras. Eso vendría siendo el álgebra relacional. Este fue un taller realizado junto a una compañera de universidad.",
     ],
-    img: "Imagen Envio.png",
-    tech: [{name: "EXCEL", link: "https://unbosqueeduco-my.sharepoint.com/:x:/g/personal/jlozadaj_unbosque_edu_co/IQCIwE5ptz34T7t__E9Qv3ghAXJyzmgYqmnaY8ILiq1tnCk?e=sTb3s7"}]
+    img: "Foto Algebra.png",
+    tech: [{name: "PDF EVIDENCIAS", link: "https://unbosqueeduco-my.sharepoint.com/:b:/g/personal/jlozadaj_unbosque_edu_co/IQAlxgNRJtLMRqUzcj4Su8CiARPgALC0cPjXbyi4RKrtEL8?e=YOY9I0"}]
   },
   {
-    title: "Normalización Ejercicio Sistema Integral Video Club",
+    title: "Álgebra Relacional - Calculadora",
     desc: [
-      "Ejercicio del taller de normalización, donde se daba una tabla y sus correspondientes columnas. La idea era llevar la tabla hasta la 3FN.",
+      "Se usó una calculdora de álgebra relacional para probar ejercicios y sentencias.",
     ],
-    img: "Imagen Video.png",
-    tech: [{name: "RELAX", link: "https://unbosqueeduco-my.sharepoint.com/:x:/g/personal/jlozadaj_unbosque_edu_co/IQCKcb1IRZGIQZl8klLJEjqxAXRUg_KfaWZ6CjEdXFkoVkk?e=2k0srZ"}]
+    img: "RELAX.png",
+    tech: [{name: "RELAX", link: "https://dbis-uibk.github.io/relax/calc/local/ufes/local/()"}]
   }
 ];
 ---
@@ -25,10 +25,10 @@ const projects = [
 <!DOCTYPE html>
 <html
 >
-  <Header title="Normalización | JFLJ" />
+  <Header title="NoSQL | JFLJ" />
   <body>
     <div class="content">
-        <Sidebar selectedItem="evidencias" />
+        <Sidebar selectedItem="evidencias-nosql" />
       <nav class="main">
         <div class="container">
           <div class="back-nav-container">
@@ -38,7 +38,7 @@ const projects = [
             >
           </div>
           <div class="content-container">
-            <h1>Normalización</h1>
+            <h1>NoSQL</h1>
             <section class="items-container">
                 <div class="resouce-items">
                     {projects.map(project => (

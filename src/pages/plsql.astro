@@ -1,0 +1,61 @@
+---
+import Header from '../components/Header.astro';
+import Project from "../components/Project_normalizacion.astro";
+import Sidebar from "../components/Sidebar.astro";
+const projects = [
+  {
+    title: "Normalización Ejercicio Sistema Envio Internacional",
+    desc: [
+      "Ejercicio del taller de normalización, donde se daba una tabla y sus correspondientes columnas. La idea era llevar la tabla hasta la 3FN.",
+    ],
+    img: "Imagen Envio.png",
+    tech: [{name: "EXCEL", link: "https://unbosqueeduco-my.sharepoint.com/:x:/g/personal/jlozadaj_unbosque_edu_co/IQCIwE5ptz34T7t__E9Qv3ghAXJyzmgYqmnaY8ILiq1tnCk?e=sTb3s7"}]
+  },
+  {
+    title: "Normalización Ejercicio Sistema Integral Video Club",
+    desc: [
+      "Ejercicio del taller de normalización, donde se daba una tabla y sus correspondientes columnas. La idea era llevar la tabla hasta la 3FN.",
+    ],
+    img: "Imagen Video.png",
+    tech: [{name: "RELAX", link: "https://unbosqueeduco-my.sharepoint.com/:x:/g/personal/jlozadaj_unbosque_edu_co/IQCKcb1IRZGIQZl8klLJEjqxAXRUg_KfaWZ6CjEdXFkoVkk?e=2k0srZ"}]
+  }
+];
+---
+
+<!DOCTYPE html>
+<html
+>
+  <Header title="PL/SQL | JFLJ" />
+  <body>
+    <div class="content">
+        <Sidebar selectedItem="evidencias-plsql" />
+      <nav class="main">
+        <div class="container">
+          <div class="back-nav-container">
+            <a href="/" class="back-nav-button w-inline-block"
+              ><img src="/assets/back.svg" loading="lazy" alt="" class="back-nav-img" />
+              <div>Volver</div></a
+            >
+          </div>
+          <div class="content-container">
+            <h1>PL/SQL</h1>
+            <section class="items-container">
+                <div class="resouce-items">
+                    {projects.map(project => (
+                      <Project 
+                        title={project.title} 
+                        desc={project.desc}
+                        tech={project.tech}
+                        img={project.img}
+                      />
+                    ))}
+                  </div>
+            </section>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+  </body>
+</html>

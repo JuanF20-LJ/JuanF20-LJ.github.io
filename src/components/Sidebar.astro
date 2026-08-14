@@ -130,28 +130,6 @@ const { selectedItem } = Astro.props;
 
         <div class="dropdown-menu">
           <a
-            href="/modelado"
-            class={`dropdown-item ${
-              selectedItem === 'evidencias-modelado'
-                ? 'w--current'
-                : ''
-            }`}
-          >
-            Modelado
-          </a>
-
-          <a
-            href="/normalizacion"
-            class={`dropdown-item ${
-              selectedItem === 'evidencias-normalizacion'
-                ? 'w--current'
-                : ''
-            }`}
-          >
-            Normalización
-          </a>
-
-          <a
             href="/sql"
             class={`dropdown-item ${
               selectedItem === 'evidencias-sql'
@@ -160,6 +138,28 @@ const { selectedItem } = Astro.props;
             }`}
           >
             SQL
+          </a>
+
+          <a
+            href="/plsql"
+            class={`dropdown-item ${
+              selectedItem === 'evidencias-plsql'
+                ? 'w--current'
+                : ''
+            }`}
+          >
+            PL/SQL Scripts
+          </a>
+
+          <a
+            href="/nosql"
+            class={`dropdown-item ${
+              selectedItem === 'evidencias-nosql'
+                ? 'w--current'
+                : ''
+            }`}
+          >
+            NoSQL
           </a>
 
           <a
