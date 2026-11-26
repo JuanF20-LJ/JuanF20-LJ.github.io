@@ -1,0 +1,91 @@
+JSON RESTAURANTE:
+{
+  "_id": "64b000000000000000000001",
+  "nombre": "Burger House",
+  "ciudad": "Bogota",
+  "direccion": "Calle 100 #15-20",
+  "estaActivo": true,
+  "menu": [
+    {
+      "_id": "PROD001",
+      "nombre": "Hamburguesa clasica",
+      "precio": 25000,
+      "disponible": true,
+      "atributos": [
+        {
+          "clave": "tamano",
+          "valor": "Grande"
+        },
+        {
+          "clave": "picante",
+          "valor": "Bajo"
+        },
+        {
+          "clave": "vegano",
+          "valor": "false"
+        },
+        {
+          "clave": "adiciones",
+          "valor": "Queso y tocineta"
+        }
+      ]
+    }
+  ],
+  "calificacionPromedio": 4.7,
+  "cantidadResenias": 52000,
+  "resenasRecientes": [
+    {
+      "_id": "64b000000000000000000101",
+      "nombreCliente": "Carlos Ramirez",
+      "calificacion": 5,
+      "comentario": "Excelente comida y servicio",
+      "fechaPublicacion": "2026-11-04T15:00:00Z"
+    }
+  ]
+}
+
+JSON CLIENTE:
+{
+  "_id": "64b000000000000000000002",
+  "nombre": "Carlos Ramirez",
+  "correo": "carlos@gmail.com",
+  "telefono": "3001234567"
+}
+
+JSON REPARTIDOR:
+{
+  "_id": "64b000000000000000000003",
+  "nombre": "Andres Lopez",
+  "correo": "andres@gmail.com",
+  "telefono": "3101234567",
+  "vehiculo": "Motocicleta"
+}
+
+JSON PEDIDO:
+{
+  "_id": "64b000000000000000000004",
+  "cliente_id": "64b000000000000000000002",
+  "restaurante_id": "64b000000000000000000001",
+  "repartidor_id": "64b000000000000000000003",
+  "items": [
+    {
+      "menuItemId": "PROD001",
+      "nombre": "Hamburguesa clasica",
+      "precioUnitario": 25000,
+      "cantidad": 2,
+      "subtotal": 50000
+    }
+  ],
+  "pagoTotal": 55000,
+  "fechaCreacion": "2026-11-04T14:30:00Z"
+}
+
+JSON RESEÑA:
+{
+  "_id": "64b000000000000000000101",
+  "restaurante_id": "64b000000000000000000001",
+  "cliente_id": "64b000000000000000000002",
+  "calificacion": 5,
+  "comentario": "Excelente comida y servicio",
+  "fechaCreacion": "2026-11-04T15:00:00Z"
+}

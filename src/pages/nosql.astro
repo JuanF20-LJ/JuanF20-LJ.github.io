@@ -3,15 +3,52 @@ import Header from '../components/Header.astro';
 import Project from "../components/Project_nosql.astro";
 import Sidebar from "../components/Sidebar.astro";
 
+import codigo01 from "../codigo/nosql/01_taller_mql_consultas.js?raw";
+import codigo02 from "../codigo/nosql/02_taller_mql_agregaciones.js?raw";
+import codigo03 from "../codigo/nosql/03_taller_mql_escritura_indices.js?raw";
+import codigo04 from "../codigo/nosql/04_modelo_rappi.json?raw";
+import codigo05 from "../codigo/nosql/05_practica_restaurante.js?raw";
+
 const secciones = [
   {
-    titulo: "Subtítulo sección",
-    descripcion: "",
-    codigo: `// Caso 1: Consultar los restaurantes de cocina colombiana
-use restaurante
-db.restaurantes.find({ tipoCocina: "Colombiana" })`,
-    link: "#",
-    textoLink: "Ver más"
+    titulo: "Taller MQL: consultas con find",
+    descripcion:
+      "Parte A del taller sobre la base de ejemplo sample_mflix de MongoDB. Se consultan películas de drama entre 2000 y 2010 con rating mayor o igual a 8, películas de Tom Hanks que no dirigió Steven Spielberg, películas con exactamente tres géneros que incluyan comedia y romance, películas sin clasificación o con valor UNRATED o NOT RATED (con su conteo), y títulos que empiezan por \"The\" y terminan en \"Man\" usando una expresión regular.",
+    aprendizaje:
+      "Que al filtrar un campo que es un arreglo, MongoDB devuelve el documento si alguno de sus elementos coincide; que $all y $size permiten exigir el contenido y el tamaño exacto de un arreglo; que $exists diferencia un campo ausente de un valor; y que limit() restringe cuántos documentos se muestran, no cuántos cumplen el filtro, por lo que el conteo se hace aparte con countDocuments().",
+    codigo: codigo01
+  },
+  {
+    titulo: "Taller MQL: agregaciones con aggregate",
+    descripcion:
+      "Parte B del taller. Con pipelines de agregación se calcula, para cada género con más de 500 películas, la cantidad, el rating promedio y el máximo; el top 5 de directores con más películas de rating alto, con hasta tres títulos de ejemplo; la cantidad de películas por década desde 1950; y los usuarios con más de 250 comentarios, con la fecha de su primer y último comentario.",
+    aprendizaje:
+      "El orden de las etapas de un pipeline ($match, $unwind, $group, $project, $sort, $limit); que $unwind convierte cada elemento de un arreglo en un documento para poder agruparlo; que conviene filtrar por tipo ($type) para descartar valores vacíos antes de calcular promedios; y que un $match después de un $group funciona como el HAVING de SQL.",
+    codigo: codigo02
+  },
+  {
+    titulo: "Taller MQL: escritura e índices",
+    descripcion:
+      "Parte C del taller. Se crea la colección peliculas_pareja con $out a partir de las películas de 2015, con un campo calculado categoria (Alta, Media o Baja) usando $switch; se actualizan las de categoría Media con updateMany ($set y $inc) y se eliminan las de categoría Baja con deleteMany. Por último, se mide la consulta de la parte A con explain(\"executionStats\") antes y después de crear un índice compuesto.",
+    aprendizaje:
+      "Que $out guarda el resultado de un pipeline como una colección nueva; la diferencia entre matchedCount y modifiedCount; y que un índice compuesto bien diseñado según la regla ESR (igualdad, orden, rango) cambia el plan de COLLSCAN a IXSCAN: en este caso los documentos examinados bajaron de 21.349 a 10 y el tiempo de 27 ms a 1 ms.",
+    codigo: codigo03
+  },
+  {
+    titulo: "Modelado de documentos: modelo Rappi",
+    descripcion:
+      "Ejemplos en JSON del modelo de datos de una aplicación de domicilios tipo Rappi, con cinco colecciones: restaurante (con su menú embebido, atributos de cada producto y reseñas recientes), cliente, repartidor, pedido (con sus ítems) y reseña.",
+    aprendizaje:
+      "Cómo decidir qué se embebe y qué se referencia: el menú vive dentro del restaurante porque siempre se consulta con él; los atributos variables de un producto se guardan como pares clave y valor (patrón Attribute); el restaurante guarda solo las reseñas recientes (patrón Subset) y valores ya calculados como la calificación promedio (patrón Computed); y el pedido copia el nombre y el precio de cada producto para conservar cómo era al momento de la compra.",
+    codigo: codigo04
+  },
+  {
+    titulo: "Práctica MongoDB: base restaurante",
+    descripcion:
+      "Práctica general sobre una base propia de restaurantes con cuatro colecciones: restaurantes, platos, clientes y pedidos. Recorre la inserción de documentos, las consultas con proyección y operadores, los subdocumentos y arreglos, las expresiones regulares, el ordenamiento y conteo, las actualizaciones ($set, $inc, $push, $pull, upsert), las eliminaciones, las agregaciones con $lookup y los índices básicos.",
+    aprendizaje:
+      "Las operaciones fundamentales de MongoDB en un solo recorrido, y cómo se relacionan colecciones mediante referencias (restauranteId, clienteId) que luego se unen con $lookup, de forma parecida a un JOIN en SQL.",
+    codigo: codigo05
   },
 ];
 ---
@@ -40,9 +77,8 @@ db.restaurantes.find({ tipoCocina: "Colombiana" })`,
                       <Project
                         titulo={seccion.titulo}
                         descripcion={seccion.descripcion}
+                        aprendizaje={seccion.aprendizaje}
                         codigo={seccion.codigo}
-                        link={seccion.link}
-                        textoLink={seccion.textoLink}
                       />
                     ))}
                   </div>
