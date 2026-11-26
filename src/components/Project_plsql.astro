@@ -1,5 +1,5 @@
 ---
-const { titulo, descripcion, aprendizaje, codigo, link, textoLink } = Astro.props;
+const { titulo, descripcion, aprendizaje, codigo } = Astro.props;
 ---
 
 <div class="single-item">
@@ -21,14 +21,6 @@ const { titulo, descripcion, aprendizaje, codigo, link, textoLink } = Astro.prop
 
   <div class="mini-label-white">Código PL/SQL</div>
   <pre class="bloque-codigo"><code>{codigo}</code></pre>
-
-  {link && (
-    <div class="chips-container">
-      <a href={link} target="_blank" class="single-chip">
-        {textoLink ? textoLink : "Ver más"}
-      </a>
-    </div>
-  )}
 </div>
 
 <style>
