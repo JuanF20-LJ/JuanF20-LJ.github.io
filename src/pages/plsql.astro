@@ -2,7 +2,20 @@
 import Header from '../components/Header.astro';
 import Project from "../components/Project_plsql.astro";
 import Sidebar from "../components/Sidebar.astro";
-const projects = [];
+
+const secciones = [
+  {
+    titulo: "Subtítulo sección",
+    descripcion: "",
+    codigo: `-- Caso 1: Imprimir un mensaje
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Hola desde PL/SQL');
+END;
+/`,
+    link: "#",
+    textoLink: "Ver más"
+  },
+];
 ---
 
 <!DOCTYPE html>
@@ -25,12 +38,13 @@ const projects = [];
             <p>En este apartado se encontrarán las evidencias relacionadas a PL/SQL</p>
             <section class="items-container">
                 <div class="resouce-items">
-                    {projects.map(project => (
-                      <Project 
-                        title={project.title} 
-                        desc={project.desc}
-                        tech={project.tech}
-                        img={project.img}
+                    {secciones.map(seccion => (
+                      <Project
+                        titulo={seccion.titulo}
+                        descripcion={seccion.descripcion}
+                        codigo={seccion.codigo}
+                        link={seccion.link}
+                        textoLink={seccion.textoLink}
                       />
                     ))}
                   </div>
