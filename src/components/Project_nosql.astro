@@ -1,11 +1,23 @@
 ---
-const { titulo, descripcion, codigo, link, textoLink } = Astro.props;
+const { titulo, descripcion, aprendizaje, codigo, link, textoLink } = Astro.props;
 ---
 
 <div class="single-item">
   <h3>{titulo}</h3>
 
-  {descripcion && <p class="seccion-desc">{descripcion}</p>}
+  {descripcion && (
+    <div>
+      <div class="mini-label-white gray-color">Descripción</div>
+      <p class="seccion-texto">{descripcion}</p>
+    </div>
+  )}
+
+  {aprendizaje && (
+    <div>
+      <div class="mini-label-white gray-color">Lo que se aprendió</div>
+      <p class="seccion-texto">{aprendizaje}</p>
+    </div>
+  )}
 
   <div class="mini-label-white">Código MongoDB</div>
   <pre class="bloque-codigo"><code>{codigo}</code></pre>
@@ -20,8 +32,10 @@ const { titulo, descripcion, codigo, link, textoLink } = Astro.props;
 </div>
 
 <style>
-  .seccion-desc {
-    margin-bottom: 4px;
+  .seccion-texto {
+    margin-top: 4px;
+    margin-bottom: 0;
+    white-space: pre-line;
   }
 
   .bloque-codigo {
@@ -34,9 +48,9 @@ const { titulo, descripcion, codigo, link, textoLink } = Astro.props;
     font-family: IBM Plex Mono, monospace;
     font-size: 13px;
     line-height: 20px;
-    white-space: pre;        
-    overflow: auto;          
-    max-height: 480px;       
+    white-space: pre;
+    overflow: auto;
+    max-height: 480px;
     tab-size: 2;
   }
 
