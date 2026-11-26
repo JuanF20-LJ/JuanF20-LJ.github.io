@@ -22,104 +22,146 @@ const secciones = [
     titulo: "Sentencias de control",
     descripcion:
       "Práctica del módulo 1 sobre un esquema propio de estudiantes y notas. Recorre el bloque mínimo de PL/SQL, las tres formas de IF, CASE simple y buscado (como sentencia y como expresión), los ciclos LOOP, WHILE y FOR, el FOR sobre cursor, CONTINUE y EXIT con etiquetas, y una comparación entre procesar fila por fila y procesar de forma masiva. Incluye pasos con errores provocados, como un CASE sin ELSE o intentar asignar un valor al índice de un FOR.",
-    aprendizaje:
-      "Que en PL/SQL una condición puede ser TRUE, FALSE o NULL, y que una comparación con NULL nunca es verdadera (se usa IS NULL); que una sentencia CASE sin ELSE falla con CASE_NOT_FOUND si ninguna rama coincide; que el índice de un FOR es de solo lectura; y que una sola sentencia SQL masiva suele ser mucho más rápida que un ciclo que procesa fila por fila.",
+    aprendizaje: [
+      "En PL/SQL una condición puede ser TRUE, FALSE o NULL, y una comparación con NULL nunca es verdadera (se usa IS NULL).",
+      "Una sentencia CASE sin ELSE falla con CASE_NOT_FOUND si ninguna rama coincide.",
+      "El índice de un ciclo FOR es de solo lectura.",
+      "Una sola sentencia SQL masiva suele ser mucho más rápida que un ciclo que procesa fila por fila."
+    ],
     codigo: codigo01
   },
   {
     titulo: "Funciones almacenadas",
     descripcion:
       "Práctica del módulo 2: se crea una función que calcula la nota definitiva y se invoca desde una consulta, desde un bloque y desde DUAL. Luego se trabajan los errores típicos al compilar (longitud en el tipo del RETURN, una ruta sin RETURN), funciones DETERMINISTIC con un índice basado en función, RESULT_CACHE, la función dentro de un paquete, la consulta del diccionario de datos y la invalidación y recompilación de objetos.",
-    aprendizaje:
-      "Que el RETURN de la firma se declara sin longitud, pero la variable que se devuelve sí la tiene; que todos los caminos de una función deben terminar en un RETURN; que una función con DML no se puede invocar desde una consulta; y que si cambia una tabla, las funciones que dependen de ella quedan inválidas hasta que se recompilan.",
+    aprendizaje: [
+      "El RETURN de la firma se declara sin longitud, pero la variable que se devuelve sí la tiene.",
+      "Todos los caminos de una función deben terminar en un RETURN.",
+      "Una función con DML no se puede invocar desde una consulta.",
+      "Si cambia una tabla, las funciones que dependen de ella quedan inválidas hasta que se recompilan."
+    ],
     codigo: codigo02
   },
   {
     titulo: "Procedimientos almacenados",
     descripcion:
       "Práctica del módulo 3 con un caso de matrículas: procedimientos con parámetros IN, OUT e IN OUT, un procedimiento real que valida, actúa e informa, los tres errores de negocio provocados a propósito, el registro de errores con una transacción autónoma, el bloqueo FOR UPDATE con dos sesiones, SAVEPOINT, un paquete con una función privada y procesamiento masivo con BULK COLLECT y FORALL.",
-    aprendizaje:
-      "Cómo se comporta cada modo de parámetro (un OUT siempre llega vacío al procedimiento); que una transacción autónoma permite guardar un log aunque la operación principal haga ROLLBACK; que FOR UPDATE evita que dos sesiones se pasen del cupo al mismo tiempo; y que un paquete permite agrupar la lógica y ocultar lo que no debe usarse desde afuera.",
+    aprendizaje: [
+      "Cómo se comporta cada modo de parámetro: un OUT siempre llega vacío al procedimiento.",
+      "Una transacción autónoma permite guardar un log aunque la operación principal haga ROLLBACK.",
+      "FOR UPDATE evita que dos sesiones superen el cupo al mismo tiempo.",
+      "Un paquete agrupa la lógica y oculta lo que no debe usarse desde afuera."
+    ],
     codigo: codigo03
   },
   {
     titulo: "Disparadores (triggers)",
     descripcion:
       "Práctica del módulo 4 sobre inscripciones de estudiantes: disparadores BEFORE INSERT que completan valores, uno de auditoría para INSERT, UPDATE y DELETE con predicados condicionales, la cláusula WHEN, el orden de disparo entre sentencia y fila, FOLLOWS para ordenar dos disparadores, INSTEAD OF sobre una vista, el error de tabla mutante resuelto con un disparador compuesto, un disparador de sistema que audita el DDL y el error de hacer COMMIT dentro de un disparador.",
-    aprendizaje:
-      "La diferencia entre disparadores de sentencia y de fila, y entre :NEW y :OLD; que en la cláusula WHEN se escriben NEW y OLD sin los dos puntos; que un disparador de fila no puede consultar la misma tabla que lo disparó (ORA-04091) y que el disparador compuesto resuelve ese caso; y que un disparador no puede confirmar la transacción.",
+    aprendizaje: [
+      "La diferencia entre disparadores de sentencia y de fila, y entre :NEW y :OLD.",
+      "En la cláusula WHEN se escriben NEW y OLD sin los dos puntos.",
+      "Un disparador de fila no puede consultar la misma tabla que lo disparó (ORA-04091), y el disparador compuesto resuelve ese caso.",
+      "Un disparador no puede confirmar la transacción con COMMIT."
+    ],
     codigo: codigo04
   },
   {
     titulo: "Paquetes con pruebas: pkg_inventario",
     descripcion:
       "Script de pruebas del tema de paquetes. Crea un esquema de inventario propio, un paquete auxiliar pkg_assert para verificar resultados y el paquete pkg_inventario con su especificación y su cuerpo. Después ejecuta diecisiete pruebas que imprimen [OK] o [FALLA]: constantes y sobrecarga, estado del paquete en la sesión, reglas de negocio, subprogramas privados, uso de funciones en SQL, transacciones con bitácora autónoma y dependencias al recompilar.",
-    aprendizaje:
-      "Que la especificación es lo público del paquete y el cuerpo es la implementación; que las variables del paquete conservan su valor durante toda la sesión; que un subprograma que no está en la especificación no se puede llamar desde afuera; y que recompilar solo el cuerpo no invalida a los objetos que usan el paquete.",
+    aprendizaje: [
+      "La especificación es la parte pública del paquete y el cuerpo es la implementación.",
+      "Las variables del paquete conservan su valor durante toda la sesión.",
+      "Un subprograma que no está en la especificación no se puede llamar desde afuera.",
+      "Recompilar solo el cuerpo no invalida a los objetos que usan el paquete."
+    ],
     codigo: codigo05
   },
   {
     titulo: "Taller PL/SQL: procedimientos almacenados",
     descripcion:
       "Parte 1 del taller grupal sobre un esquema de inventario y ventas. SP_REGISTRAR_PRODUCTO registra un producto validando precio, costo, categoría y código duplicado; SP_AJUSTAR_STOCK registra entradas, salidas y ajustes de inventario en una bodega; y SP_CREAR_PEDIDO crea la cabecera de un pedido rechazando clientes inactivos o sin cupo. Cada objeto trae su justificación de diseño.",
-    aprendizaje:
-      "Validar antes de tomar el número de la secuencia, porque un ROLLBACK no lo devuelve; dejar que la restricción UNIQUE controle los duplicados (incluso con varios usuarios a la vez) y capturar DUP_VAL_ON_INDEX; y no hacer COMMIT dentro del procedimiento para que quien lo invoca decida.",
+    aprendizaje: [
+      "Validar antes de tomar el número de la secuencia, porque un ROLLBACK no lo devuelve.",
+      "Dejar que la restricción UNIQUE controle los duplicados, incluso con varios usuarios a la vez, y capturar DUP_VAL_ON_INDEX.",
+      "No hacer COMMIT dentro del procedimiento para que quien lo invoca decida."
+    ],
     codigo: codigo06
   },
   {
     titulo: "Taller PL/SQL: funciones",
     descripcion:
       "Parte 2 del taller. FN_STOCK_DISPONIBLE devuelve el stock de una bodega o el consolidado de todas; FN_CUPO_DISPONIBLE calcula el cupo de crédito de un cliente sin permitir valores negativos; FN_CALCULAR_DESCUENTO aplica reglas de descuento acumulables según el monto; y una consulta usa la función de cupo directamente dentro de un SELECT.",
-    aprendizaje:
-      "Diseñar funciones que respondan con un valor seguro (cero) en vez de lanzar una excepción cuando el dato no existe, y que una función definida por el usuario se puede invocar desde SQL siempre que no modifique datos.",
+    aprendizaje: [
+      "Diseñar funciones que respondan con un valor seguro, como cero, en vez de lanzar una excepción cuando el dato no existe.",
+      "Una función definida por el usuario se puede invocar desde SQL siempre que no modifique datos."
+    ],
     codigo: codigo07
   },
   {
     titulo: "Taller PL/SQL: cursores",
     descripcion:
       "Parte 3 del taller. Un cursor explícito con OPEN, FETCH y CLOSE para el reporte de productos bajo el stock mínimo; un cursor con parámetros para los pedidos confirmados de un cliente en un rango de fechas; un cursor FOR UPDATE con WHERE CURRENT OF para ajustar precios; SP_LISTAR_MOVIMIENTOS, que devuelve un SYS_REFCURSOR; y una actualización masiva con BULK COLLECT y FORALL.",
-    aprendizaje:
-      "Cuándo conviene cada tipo de cursor; que FOR UPDATE bloquea las filas desde que se abre el cursor hasta el COMMIT o ROLLBACK; que WHERE CURRENT OF actualiza justo la fila leída sin buscarla otra vez; y que BULK COLLECT y FORALL reducen los cambios de contexto entre PL/SQL y SQL.",
+    aprendizaje: [
+      "Cuándo conviene cada tipo de cursor: explícito, con parámetros, FOR UPDATE o SYS_REFCURSOR.",
+      "FOR UPDATE bloquea las filas desde que se abre el cursor hasta el COMMIT o ROLLBACK.",
+      "WHERE CURRENT OF actualiza justo la fila leída sin buscarla otra vez.",
+      "BULK COLLECT y FORALL reducen los cambios de contexto entre PL/SQL y SQL."
+    ],
     codigo: codigo08
   },
   {
     titulo: "Taller PL/SQL: manejo de excepciones",
     descripcion:
       "Parte 4 del taller. FN_PRECIO_PRODUCTO maneja NO_DATA_FOUND y TOO_MANY_ROWS; SP_VALIDAR_DESPACHO declara y lanza una excepción propia; SP_ANULAR_PEDIDO usa RAISE_APPLICATION_ERROR con códigos de negocio; un bloque asocia el error de llave foránea ORA-02291 a una excepción con nombre; y SP_REGISTRAR_ERROR guarda los errores en un log con una transacción autónoma.",
-    aprendizaje:
-      "Nombrar las condiciones de error hace el código más claro que resolverlas con un IF; PRAGMA EXCEPTION_INIT permite atrapar un error de Oracle específico en lugar de usar un WHEN OTHERS genérico; y la transacción autónoma conserva el log aunque la transacción principal termine en ROLLBACK.",
+    aprendizaje: [
+      "Nombrar las condiciones de error hace el código más claro que resolverlas con un IF.",
+      "PRAGMA EXCEPTION_INIT permite atrapar un error específico de Oracle en lugar de usar un WHEN OTHERS genérico.",
+      "La transacción autónoma conserva el log aunque la transacción principal termine en ROLLBACK."
+    ],
     codigo: codigo09
   },
   {
     titulo: "Taller PL/SQL: disparadores",
     descripcion:
       "Parte 5 del taller. TRG_CLIENTE_BI completa los datos del cliente al insertarlo; TRG_PRODUCTO_AU_PRECIO audita los cambios de precio usando la cláusula WHEN; TRG_PRODUCTO_BIU_MARGEN impide guardar productos sin el margen mínimo; TRG_DETALLE_AI_STOCK descuenta el stock y registra el movimiento al vender; TRG_DETALLE_TOTAL recalcula el total del pedido; y TRG_V_STOCK_IO permite actualizar una vista que no es actualizable de forma directa.",
-    aprendizaje:
-      "Elegir el momento de disparo correcto (BEFORE para validar o completar datos, AFTER para afectar otras tablas); resolver el error de tabla mutante con un disparador compuesto; y usar INSTEAD OF para dar comportamiento de actualización a una vista con varias tablas.",
+    aprendizaje: [
+      "Elegir el momento de disparo correcto: BEFORE para validar o completar datos y AFTER para afectar otras tablas.",
+      "El error de tabla mutante se resuelve con un disparador compuesto.",
+      "INSTEAD OF da comportamiento de actualización a una vista con varias tablas."
+    ],
     codigo: codigo10
   },
   {
     titulo: "Taller PL/SQL: caso integrador",
     descripcion:
       "Parte 6 del taller. El paquete PKG_VENTAS expone SP_FACTURAR_PEDIDO, que valida que el pedido exista y esté en borrador, recorre sus líneas con un cursor, calcula el descuento y valida el cupo del cliente con las funciones de la parte 2, confirma el pedido, actualiza el saldo del cliente y, ante cualquier falla, revierte hasta un SAVEPOINT y registra el error.",
-    aprendizaje:
-      "Cómo se integran en una sola operación los procedimientos, funciones, cursores, excepciones y transacciones vistos en el taller, y cómo usar SAVEPOINT para revertir solo la parte que falló sin perder el resto de la transacción.",
+    aprendizaje: [
+      "Cómo se integran en una sola operación los procedimientos, funciones, cursores, excepciones y transacciones vistos en el taller.",
+      "SAVEPOINT permite revertir solo la parte que falló sin perder el resto de la transacción."
+    ],
     codigo: codigo11
   },
   {
     titulo: "Parcial: paquete de nómina",
     descripcion:
       "Avance del parcial grupal: la especificación del paquete pck_proceso_nomina, que expone un procedimiento para aumentar el sueldo de un empleado y dos funciones sobre el salario por departamento, y la función fn_salario_con_comision, que calcula el salario de un empleado sumándole su comisión, con su prueba sobre la tabla EMPLOYEES del esquema HR.",
-    aprendizaje:
-      "La estructura de un paquete (la especificación declara lo que se expone y el cuerpo lo implementa), el uso de %TYPE para declarar variables con el tipo de una columna, y la notación de nombres de variables vista en clase.",
+    aprendizaje: [
+      "La estructura de un paquete: la especificación declara lo que se expone y el cuerpo lo implementa.",
+      "El uso de %TYPE para declarar variables con el tipo de una columna.",
+      "La notación de nombres de variables vista en clase."
+    ],
     codigo: codigo12
   },
   {
     titulo: "Práctica PL/SQL sobre HR",
     descripcion:
       "Práctica general sobre copias de las tablas de HR que va de lo sencillo a lo completo: bloques anónimos y variables con %TYPE y %ROWTYPE, estructuras de control, cursores, registros y colecciones con BULK COLLECT y FORALL, excepciones predefinidas y propias, procedimientos con parámetros IN, OUT e IN OUT, funciones, disparadores de validación y auditoría, un paquete de nómina con sobrecarga y SQL dinámico.",
-    aprendizaje:
-      "Una visión completa de PL/SQL en un solo recorrido: cómo se conectan los bloques, los subprogramas almacenados, los disparadores y los paquetes, y cómo consultar en el diccionario de datos el estado y el código fuente de cada objeto creado.",
+    aprendizaje: [
+      "Cómo se conectan los bloques, los subprogramas almacenados, los disparadores y los paquetes en un solo recorrido.",
+      "Cómo consultar en el diccionario de datos el estado y el código fuente de cada objeto creado."
+    ],
     codigo: codigo13
   },
 ];

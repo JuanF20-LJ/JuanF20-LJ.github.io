@@ -17,64 +17,96 @@ const secciones = [
     titulo: "Reuniones, agregación y subconsultas en HR",
     descripcion:
       "Consultas sobre el esquema HR de Oracle que unen hasta cinco tablas (empleados, departamentos, cargos, ubicaciones, países y regiones). Incluye reuniones internas y externas, auto-reuniones para encontrar al jefe de cada empleado, agrupaciones con subtotales (ROLLUP y CUBE), subconsultas de una y varias filas, subconsultas correlacionadas, EXISTS y expresiones comunes de tabla (WITH).",
-    aprendizaje:
-      "La diferencia entre INNER, LEFT, RIGHT y FULL JOIN según qué filas se quieren conservar; que WHERE filtra filas antes de agrupar y HAVING filtra grupos después; y que una subconsulta correlacionada se evalúa por cada fila de la consulta externa, mientras que una CTE calcula el resultado una sola vez y deja la consulta más legible.",
+    aprendizaje: [
+      "La diferencia entre INNER, LEFT, RIGHT y FULL JOIN según qué filas se quieren conservar.",
+      "WHERE filtra filas antes de agrupar y HAVING filtra grupos después de agrupar.",
+      "Una subconsulta correlacionada se evalúa por cada fila de la consulta externa.",
+      "Una CTE (WITH) calcula el resultado una sola vez y deja la consulta más legible."
+    ],
     codigo: codigo01
   },
   {
     titulo: "Funciones analíticas, consultas jerárquicas y operadores de conjunto",
     descripcion:
       "Rankings de salarios por departamento (ROW_NUMBER, RANK, DENSE_RANK), sumas acumuladas, comparación con la fila anterior y siguiente (LAG y LEAD), Top-N con FETCH FIRST y paginación. También el organigrama completo de la empresa con CONNECT BY, operadores UNION, INTERSECT y MINUS, y funciones de fila como CASE, DECODE, NVL, fechas, LISTAGG y expresiones regulares.",
-    aprendizaje:
-      "Las funciones de ventana calculan sobre un grupo de filas sin colapsarlas, a diferencia de GROUP BY; RANK salta posiciones después de un empate y DENSE_RANK no. Las consultas jerárquicas recorren una tabla que se apunta a sí misma, y los operadores de conjunto exigen el mismo número de columnas y tipos compatibles.",
+    aprendizaje: [
+      "Las funciones de ventana calculan sobre un grupo de filas sin colapsarlas, a diferencia de GROUP BY.",
+      "RANK salta posiciones después de un empate y DENSE_RANK no.",
+      "Las consultas jerárquicas recorren una tabla que se apunta a sí misma.",
+      "Los operadores de conjunto exigen el mismo número de columnas y tipos compatibles."
+    ],
     codigo: codigo02
   },
   {
     titulo: "DML avanzado, vistas y secuencias",
     descripcion:
       "Se crean copias de las tablas de HR para practicar sin dañar los datos originales: inserciones desde una consulta, actualizaciones y borrados con subconsultas, MERGE (actualizar o insertar en una sola sentencia), INSERT ALL condicional y control de transacciones con SAVEPOINT. Además se crean vistas (con WITH CHECK OPTION y de solo lectura), una secuencia y un sinónimo.",
-    aprendizaje:
-      "Cómo trabajar sobre copias para no alterar un esquema de referencia; que ROLLBACK TO SAVEPOINT deshace solo una parte de la transacción; que una sentencia DDL hace COMMIT automático; y que una vista con WITH CHECK OPTION impide cambios que dejarían la fila fuera de la vista.",
+    aprendizaje: [
+      "Trabajar sobre copias evita alterar un esquema de referencia como HR.",
+      "ROLLBACK TO SAVEPOINT deshace solo una parte de la transacción.",
+      "Una sentencia DDL hace COMMIT automático de lo que estaba pendiente.",
+      "Una vista con WITH CHECK OPTION impide cambios que dejarían la fila fuera de la vista."
+    ],
     codigo: codigo03
   },
   {
     titulo: "Índices, plan de ejecución y bloqueos (FOR UPDATE)",
     descripcion:
       "Se consulta el plan de ejecución con EXPLAIN PLAN antes y después de crear índices: normal, compuesto, único, basado en función e invisible, y se fuerza un índice con un hint. Luego se practican los bloqueos de filas con SELECT ... FOR UPDATE usando dos sesiones: NOWAIT, WAIT, SKIP LOCKED, FOR UPDATE OF y LOCK TABLE.",
-    aprendizaje:
-      "Un índice solo se usa si la consulta filtra por sus columnas tal como fueron indexadas (por eso existen los índices basados en función), y el optimizador decide según las estadísticas de la tabla. FOR UPDATE bloquea las filas desde que se leen hasta el COMMIT o ROLLBACK, lo que evita que otra sesión las cambie mientras se decide qué hacer con ellas.",
+    aprendizaje: [
+      "Un índice solo se usa si la consulta filtra por sus columnas tal como fueron indexadas.",
+      "Por eso existen los índices basados en función, para consultas que aplican una función a la columna.",
+      "El optimizador decide el plan de ejecución según las estadísticas de la tabla.",
+      "FOR UPDATE bloquea las filas desde que se leen hasta el COMMIT o ROLLBACK.",
+      "Ese bloqueo evita que otra sesión cambie las filas mientras se decide qué hacer con ellas."
+    ],
     codigo: codigo04
   },
   {
     titulo: "Taller de repaso: reuniones y valores nulos",
     descripcion:
       "Bloques A, B y C del taller de SQL avanzado sobre HR (solo lectura). Primero se identifican los cuatro casos borde del esquema: el empleado sin jefe, el empleado sin departamento, los empleados sin comisión y los departamentos sin empleados. Con ellos se construye el inventario completo de departamentos, la cadena de mando, el contraste entre poner un filtro en ON o en WHERE y el cálculo de la compensación total.",
-    aprendizaje:
-      "COUNT(*) cuenta la fila rellenada con NULL de un LEFT JOIN, mientras que COUNT(columna) no; una condición sobre la tabla opcional escrita en WHERE convierte el LEFT JOIN en INNER JOIN; y NOT IN devuelve un conjunto vacío si la subconsulta contiene un solo NULL, problema que NOT EXISTS no tiene.",
+    aprendizaje: [
+      "COUNT(*) cuenta la fila rellenada con NULL de un LEFT JOIN, mientras que COUNT(columna) no.",
+      "Una condición sobre la tabla opcional escrita en WHERE convierte el LEFT JOIN en INNER JOIN.",
+      "NOT IN devuelve un conjunto vacío si la subconsulta contiene un solo NULL.",
+      "NOT EXISTS no tiene ese problema con los NULL."
+    ],
     codigo: codigo05
   },
   {
     titulo: "Taller de repaso: agregación, subconsultas y conjuntos",
     descripcion:
       "Bloques D, E y F del taller. Departamentos filtrados con HAVING y agregación condicional; comparación de cada empleado contra el promedio de su departamento resuelta de dos formas (subconsulta correlacionada y CTE) con sus planes de ejecución; y la movilidad interna de los empleados con INTERSECT y MINUS, contrastada con NOT EXISTS.",
-    aprendizaje:
-      "Un criterio sobre funciones de grupo no puede ir en WHERE porque los grupos aún no existen; la agregación condicional (COUNT con CASE) permite contar un subconjunto sin afectar las demás columnas; y los operadores de conjunto consideran iguales dos NULL, mientras que el operador \"=\" no.",
+    aprendizaje: [
+      "Un criterio sobre funciones de grupo no puede ir en WHERE porque los grupos aún no existen.",
+      "La agregación condicional (COUNT con CASE) cuenta un subconjunto sin afectar las demás columnas.",
+      "Los operadores de conjunto consideran iguales dos NULL, mientras que el operador \"=\" no."
+    ],
     codigo: codigo06
   },
   {
     titulo: "Taller de repaso: CTE recursiva y funciones de ventana",
     descripcion:
       "Bloques G y H del taller. La jerarquía completa de la organización se construye con una expresión común de tabla recursiva (caso base y paso recursivo), mostrando el nivel y la ruta de apellidos desde el presidente. Después se calcula el posicionamiento salarial de cada empleado en su departamento y los tres mejor pagados de cada uno.",
-    aprendizaje:
-      "Cómo separar el caso base del paso recursivo y controlar ciclos con la cláusula CYCLE; la diferencia entre ROW_NUMBER, RANK y DENSE_RANK sobre salarios empatados; que el marco por defecto de una ventana con ORDER BY es RANGE (incluye las filas empatadas); y que las funciones de ventana se calculan después del WHERE, por lo que para filtrarlas hay que envolver la consulta.",
+    aprendizaje: [
+      "Cómo separar el caso base del paso recursivo y controlar ciclos con la cláusula CYCLE.",
+      "La diferencia entre ROW_NUMBER, RANK y DENSE_RANK sobre salarios empatados.",
+      "El marco por defecto de una ventana con ORDER BY es RANGE, que incluye las filas empatadas.",
+      "Las funciones de ventana se calculan después del WHERE, por lo que para filtrarlas hay que envolver la consulta."
+    ],
     codigo: codigo07
   },
   {
     titulo: "Taller de repaso: depuración de consultas defectuosas",
     descripcion:
       "Bloque I del taller: cinco consultas que se ejecutan sin error pero devuelven un resultado incorrecto. Para cada una se muestra la versión original, la versión corregida y un cuadro de diagnóstico que calcula la evidencia del antes y el después con los datos reales. Cierra con las conclusiones técnicas y las respuestas de la verificación conceptual.",
-    aprendizaje:
-      "Que una consulta que no falla no es necesariamente correcta: los errores lógicos más comunes vienen de los NULL (en COUNT, NOT IN y AVG), de filtrar la tabla opcional de un LEFT JOIN en WHERE y de agrupar por columnas de más. Revisar primero los casos borde de los datos ayuda a detectarlos.",
+    aprendizaje: [
+      "Una consulta que no falla no es necesariamente correcta.",
+      "Los errores lógicos más comunes vienen de los NULL en COUNT, NOT IN y AVG.",
+      "Filtrar la tabla opcional de un LEFT JOIN en WHERE y agrupar por columnas de más también producen resultados incorrectos.",
+      "Revisar primero los casos borde de los datos ayuda a detectar estos errores."
+    ],
     codigo: codigo08
   },
 ];

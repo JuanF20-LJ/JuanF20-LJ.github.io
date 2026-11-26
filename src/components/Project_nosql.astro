@@ -12,10 +12,14 @@ const { titulo, descripcion, aprendizaje, codigo } = Astro.props;
     </div>
   )}
 
-  {aprendizaje && (
+  {aprendizaje && aprendizaje.length > 0 && (
     <div>
       <div class="mini-label-white gray-color">Lo que se aprendió</div>
-      <p class="seccion-texto">{aprendizaje}</p>
+      <ul class="lista-aprendizaje">
+        {aprendizaje.map(item => (
+          <li>{item}</li>
+        ))}
+      </ul>
     </div>
   )}
 
@@ -28,6 +32,17 @@ const { titulo, descripcion, aprendizaje, codigo } = Astro.props;
     margin-top: 4px;
     margin-bottom: 0;
     white-space: pre-line;
+  }
+
+  .lista-aprendizaje {
+    margin: 4px 0 0 0;
+    padding-left: 22px;
+    list-style-type: disc;
+  }
+
+  .lista-aprendizaje li {
+    margin-bottom: 4px;
+    list-style-type: disc;
   }
 
   .bloque-codigo {
