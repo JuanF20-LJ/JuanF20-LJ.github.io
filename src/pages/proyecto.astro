@@ -2,7 +2,85 @@
 import Header from '../components/Header.astro';
 import Project from "../components/Project_proyecto.astro";
 import Sidebar from "../components/Sidebar.astro";
-const projects = [];
+
+import scriptPostgres from "../codigo/proyecto/bloom_postgresql.sql?raw";
+import scriptMongo from "../codigo/proyecto/bloom_mongodb.js?raw";
+
+const projects = [
+  {
+    titulo: "Bloom",
+    descripcion:
+      "Bloom es una aplicación web para el seguimiento del ciclo menstrual. La usuaria registra cada día si tuvo menstruación, el tipo de flujo, sus síntomas, emociones y notas; con esos datos la aplicación reconstruye sus ciclos, predice los próximos periodos y la ventana de ovulación, y le muestra un calendario, recordatorios, el control de sus anticonceptivos, estadísticas de su historial y artículos informativos con comentarios.\n\nArquitectura: el frontend en Angular consume una API REST desarrollada en Spring Boot (BKApiBloom). El backend guarda los datos transaccionales (usuarias, ciclos, registros diarios, catálogos, anticonceptivos y recordatorios) en PostgreSQL 10, con lógica en PL/pgSQL, y los artículos, comentarios y estadísticas precalculadas en MongoDB 8.0. Ambas bases de datos corren en una máquina virtual con Red Hat Enterprise Linux 8 en VirtualBox, conectada en modo adaptador puente.",
+    imagen: "/assets/bloom/logo_bloom.png",
+    video: "https://www.youtube.com/embed/oV2SOCmbJJI",
+    enlaces: [
+      { nombre: "Repositorio backend (BKApiBloom)", url: "https://github.com/JuanF20-LJ/BKApiBloom" },
+      { nombre: "Repositorio frontend (BLOOM)", url: "https://github.com/7Linxx/BLOOM" }
+    ]
+  },
+  {
+    titulo: "Modelado de datos",
+    descripcion:
+      "Modelos construidos antes de la implementación: el modelo conceptual, su paso al modelo relacional para PostgreSQL y el modelo documental para MongoDB.",
+    elementos: [
+      {
+        titulo: "MERE (Modelo Entidad Relación Extendido)",
+        descripcion:
+          "Modelo conceptual de Bloom con las entidades USUARIA, CICLO_MENSTRUAL, MENSTRUACION, REGISTRO_DIARIO, ENCUESTA_INICIAL, CODIGO_VERIFICACION, ANTICONCEPTIVO, los catálogos SINTOMA, EMOCION y ACTIVIDAD_SEXUAL, y RECORDATORIO con su especialización en RECORDATORIO_MENSTRUACION y RECORDATORIO_ANTICONCEPTIVO. Incluye las cardinalidades 1:M, M:1 y N:M entre ellas.",
+        imagen: "/assets/bloom/mere.png",
+        archivo: "/docs/bloom/MERE_Bloom.drawio",
+        textoArchivo: "Descargar archivo .drawio"
+      },
+      {
+        titulo: "Modelo relacional",
+        descripcion:
+          "Modelo relacional elaborado en Oracle SQL Developer Data Modeler a partir del MERE: 14 tablas con sus llaves primarias, foráneas y restricciones únicas. Las relaciones N:M del registro diario se resuelven con las tablas intermedias registro_sintoma, registro_emocion y registro_actividad_sexual, y la especialización de recordatorio se guarda en una sola tabla con una columna que indica el subtipo.",
+        imagen: "/assets/bloom/modelo_relacional.png",
+        archivo: "/docs/bloom/modelo_relacional_datamodeler.zip",
+        textoArchivo: "Descargar modelo (Data Modeler)"
+      },
+      {
+        titulo: "Modelo de MongoDB",
+        descripcion:
+          "Modelo documental elaborado en Hackolade con cuatro colecciones: articulos (con los diez comentarios más recientes embebidos y el total de comentarios), comentarios (con una copia del id y el apodo de la autora), estadisticas_resumen (un documento por usuaria con sus estadísticas ya calculadas) y estadisticas_mensuales (un documento por usuaria y por mes). Aplica los patrones Subset, Extended Reference, Computed, Bucket y Schema Versioning.",
+        imagen: "/assets/bloom/modelo_mongodb.png",
+        archivo: "/docs/bloom/modelo_mongodb_hackolade.json",
+        textoArchivo: "Descargar modelo (Hackolade)"
+      }
+    ]
+  },
+  {
+    titulo: "Implementación",
+    descripcion:
+      "Montaje del servidor de bases de datos y creación de los objetos de PostgreSQL y MongoDB que usa la aplicación.",
+    elementos: [
+      {
+        titulo: "Implementación de la máquina virtual",
+        descripcion:
+          "Configuración de la máquina virtual en VirtualBox con Red Hat Enterprise Linux 8 (2 vCPU, 2 GB de RAM, 20 GB de disco y adaptador puente), registro del sistema en Red Hat, instalación de PostgreSQL 10 y MongoDB 8.0, medidas de seguridad (firewalld, acceso SSH con llave pública, Fail2Ban y actualizaciones automáticas), pruebas de reinicio y la bitácora de problemas resueltos.",
+        documento: "/docs/bloom/implementacion_maquina_virtual.pdf"
+      },
+      {
+        titulo: "Implementación de las bases de datos",
+        descripcion:
+          "Parámetros de PostgreSQL y MongoDB, pasos de instalación y configuración para el acceso remoto, creación de la base bloom, del usuario de la aplicación, de las tablas, los esquemas pkg_usuaria y pkg_ciclo con sus funciones y disparador, de las colecciones de MongoDB, y la conexión desde Spring Boot.",
+        documento: "/docs/bloom/implementacion_bases_de_datos.pdf"
+      },
+      {
+        titulo: "Script de PostgreSQL",
+        descripcion:
+          "Script completo para montar la base relacional: crea el usuario y la base bloom, las tablas con sus llaves, carga los catálogos y crea los objetos PL/pgSQL (paquetes, funciones de verificación y promedios, disparador del código de verificación y limpieza de códigos expirados).",
+        codigo: scriptPostgres
+      },
+      {
+        titulo: "Script de MongoDB",
+        descripcion:
+          "Script completo para montar la base documental: crea el usuario de la aplicación, las cuatro colecciones con su validación $jsonSchema, los índices y tres artículos de ejemplo.",
+        codigo: scriptMongo
+      }
+    ]
+  }
+];
 ---
 
 <!DOCTYPE html>
@@ -26,12 +104,13 @@ const projects = [];
             <section class="items-container">
                 <div class="resouce-items">
                     {projects.map(project => (
-                      <Project 
-                      title={project.title}
-                      projectDesc={project.projectDesc}
-                      items={project.items}
-                      tech={project.tech}
-                      img={project.img}
+                      <Project
+                        titulo={project.titulo}
+                        descripcion={project.descripcion}
+                        imagen={project.imagen}
+                        video={project.video}
+                        enlaces={project.enlaces}
+                        elementos={project.elementos}
                       />
                     ))}
                   </div>

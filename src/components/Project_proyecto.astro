@@ -1,87 +1,95 @@
 ---
 const {
-  title,
-  projectDesc,
-  items,
-  img,
-  tech
+  titulo,
+  descripcion,
+  imagen,
+  video,
+  enlaces,
+  elementos
 } = Astro.props;
 ---
 
 <div class="single-item custom-card">
 
-  <h3 class="project-title">{title}</h3>
+  <h3 class="project-title">{titulo}</h3>
 
-  <p class="project-description">
-    {projectDesc}
-  </p>
+  {descripcion && (
+    <p class="project-description">{descripcion}</p>
+  )}
 
-  {
-    img && (
-      <div class="image-container">
-        <img
-          src={"/assets/" + img}
-          alt="Imagen del proyecto"
-          class="project-image"
-        />
-      </div>
-    )
-  }
-
-  <div class="items-section">
-
-    <div class="section-title">
-      Evidencias / Recursos
+  {imagen && (
+    <div class="image-container">
+      <img src={imagen} alt={titulo} class="project-logo" />
     </div>
+  )}
 
+  {(video || enlaces) && (
+    <div class="section-title">Recursos</div>
+  )}
+
+  {video && (
+    <div class="video-container">
+      <iframe
+        src={video}
+        title={titulo}
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+  )}
+
+  {enlaces && (
+    <div class="links-list">
+      {enlaces.map(enlace => (
+        <a href={enlace.url} target="_blank" class="item-link">
+          {enlace.nombre}
+        </a>
+      ))}
+    </div>
+  )}
+
+  {elementos && (
     <div class="items-list">
-      {
-        items.map(item => (
-          <div class="item-card">
+      {elementos.map(elemento => (
+        <div class="item-card">
 
-            <div class="item-title">
-              {item.title}
-            </div>
+          <div class="item-title">{elemento.titulo}</div>
 
-            <p class="item-description">
-              {item.description}
-            </p>
+          {elemento.descripcion && (
+            <p class="item-description">{elemento.descripcion}</p>
+          )}
 
-            <a
-              href={item.link}
-              target="_blank"
-              class="item-link"
-            >
-              Ver recurso
+          {elemento.imagen && (
+            <a href={elemento.imagen} target="_blank">
+              <img src={elemento.imagen} alt={elemento.titulo} class="item-image" />
             </a>
+          )}
 
-          </div>
-        ))
-      }
+          {elemento.codigo && (
+            <pre class="bloque-codigo"><code>{elemento.codigo}</code></pre>
+          )}
+
+          {(elemento.documento || elemento.archivo) && (
+            <div class="links-list">
+              {elemento.documento && (
+                <a href={elemento.documento} target="_blank" class="item-link">
+                  {elemento.textoDocumento ? elemento.textoDocumento : "Ver documento"}
+                </a>
+              )}
+              {elemento.archivo && (
+                <a href={elemento.archivo} download class="item-link">
+                  {elemento.textoArchivo ? elemento.textoArchivo : "Descargar archivo"}
+                </a>
+              )}
+            </div>
+          )}
+
+        </div>
+      ))}
     </div>
-  </div>
-
-  <div class="tech-section">
-
-    <div class="section-title">
-      Tecnologías Usadas
-    </div>
-
-    <div class="chips-container">
-      {
-        tech.map(techItem => (
-          <a
-            href={techItem.link}
-            target="_blank"
-            class="single-chip tech-chip"
-          >
-            {techItem.name}
-          </a>
-        ))
-      }
-    </div>
-
-  </div>
+  )}
 
 </div>
 
@@ -98,19 +106,18 @@ const {
   }
 
   .project-description {
-    margin-bottom: 24px;
+    margin-bottom: 8px;
+    white-space: pre-line;
   }
 
   .image-container {
     text-align: center;
-    margin: 30px 0;
+    margin: 24px 0;
   }
 
-  .project-image {
+  .project-logo {
     width: 100%;
-    max-width: 520px;
-    border-radius: 12px;
-    border: 1px solid #353535;
+    max-width: 220px;
   }
 
   .section-title {
@@ -123,10 +130,35 @@ const {
     font-size: 10px;
   }
 
+  .video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #353535;
+    margin-bottom: 16px;
+  }
+
+  .video-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .links-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
   .items-list {
     display: flex;
     flex-direction: column;
     gap: 18px;
+    margin-top: 8px;
   }
 
   .item-card {
@@ -143,7 +175,16 @@ const {
   }
 
   .item-description {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    white-space: pre-line;
+  }
+
+  .item-image {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #353535;
+    background-color: #ffffff;
   }
 
   .item-link {
@@ -162,13 +203,23 @@ const {
     transform: translateY(-2px);
   }
 
-  .tech-chip {
-    text-decoration: none;
-    transition: 0.2s;
+  .bloque-codigo {
+    margin: 8px 0 0 0;
+    padding: 16px 20px;
+    background-color: #1f1f1f;
+    border: 1px solid #353535;
+    border-radius: 8px;
+    color: #e6e6e6;
+    font-family: IBM Plex Mono, monospace;
+    font-size: 13px;
+    line-height: 20px;
+    white-space: pre;
+    overflow: auto;
+    max-height: 480px;
+    tab-size: 2;
   }
 
-  .tech-chip:hover {
-    background-color: #4a4a4a;
-    transform: translateY(-2px);
+  .bloque-codigo code {
+    font-family: inherit;
   }
 </style>
